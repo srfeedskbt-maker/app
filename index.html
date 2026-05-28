@@ -739,10 +739,11 @@ SR FEEDS PRODUCTS: Map issues to Pre-Starter|Starter|Grower|Finisher|Layer Feed|
 SAFETY RULES: NEVER certify a diagnosis — always say "most likely" or "suggests". NEVER invent specific drug dosages — say "consult your vet for dosage". For emergencies: "🚨 EMERGENCY — Isolate affected animals and contact your veterinarian IMMEDIATELY. SR Feeds helpline: +91 77959 76538". Every disease response MUST end with: "⚠️ Educational guidance only — does not replace a licensed veterinary diagnosis."`;
 }
 
-/* CLAUDE API */
+/* GROQ API (via Cloudflare Worker proxy) */
+const AI_WORKER_URL = 'https://YOUR-WORKER.YOUR-NAME.workers.dev'; // ← REPLACE with your Worker URL
 async function callClaudeAPI(messages){
   try{
-    const r=await fetch('https://steep-block-47a7.pakalisohel039.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'gemini-2.0-flash',max_tokens:1024,system:aiSystemPrompt(AI.lang,AI.profile,AI.researchMode),messages})});
+    const r=await fetch(AI_WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama-3.3-70b-versatile',max_tokens:1024,system:aiSystemPrompt(AI.lang,AI.profile,AI.researchMode),messages})});
     const d=await r.json();
     if(d.error)return'⚠️ API Error: '+d.error.message+'. Please try again.';
     return d.content?.[0]?.text||'Sorry, I could not generate a response. Please try again.';
