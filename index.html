@@ -740,7 +740,7 @@ SAFETY RULES: NEVER certify a diagnosis — always say "most likely" or "suggest
 }
 
 /* GROQ API (via Cloudflare Worker proxy) */
-const AI_WORKER_URL = 'https://YOUR-WORKER.YOUR-NAME.workers.dev'; // ← REPLACE with your Worker URL
+const AI_WORKER_URL = 'https://steep-block-47a7.pakalisohel039.workers.dev'; // ← REPLACE with your Worker URL
 async function callClaudeAPI(messages){
   try{
     const r=await fetch(AI_WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama-3.3-70b-versatile',max_tokens:1024,system:aiSystemPrompt(AI.lang,AI.profile,AI.researchMode),messages})});
