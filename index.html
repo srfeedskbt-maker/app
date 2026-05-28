@@ -742,7 +742,7 @@ SAFETY RULES: NEVER certify a diagnosis — always say "most likely" or "suggest
 /* CLAUDE API */
 async function callClaudeAPI(messages){
   try{
-    const r=await fetch('https://anthropic-proxy.pakalisohel039.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:aiSystemPrompt(AI.lang,AI.profile,AI.researchMode),messages})});
+    const r=await fetch('https://steep-block-47a7.pakalisohel039.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:aiSystemPrompt(AI.lang,AI.profile,AI.researchMode),messages})});
     const d=await r.json();
     if(d.error)return'⚠️ API Error: '+d.error.message+'. Please try again.';
     return d.content?.[0]?.text||'Sorry, I could not generate a response. Please try again.';
